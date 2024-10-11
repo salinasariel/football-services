@@ -67,5 +67,16 @@ namespace services_backend.Services
             return clients;
         }
 
+        public async Task<Client> GetClientByPhone(string phone)
+        {
+            var client = await _context.Clients
+                                .FirstOrDefaultAsync(c => c.Phone == phone);
+            if (client == null)
+            {
+                return null;
+            }
+            return client;
+        }
+
     }
 }
