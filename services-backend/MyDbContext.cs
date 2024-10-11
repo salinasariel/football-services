@@ -18,7 +18,6 @@
         {
             base.OnModelCreating(modelBuilder);
 
-            // Configuraciones adicionales
             modelBuilder.Entity<Client>()
                 .HasOne(c => c.Establishment)
                 .WithMany(e => e.Clients)

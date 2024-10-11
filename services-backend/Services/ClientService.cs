@@ -53,5 +53,19 @@ namespace services_backend.Services
             await _context.SaveChangesAsync();
             return client;
         }
+        public async Task<List<Client>> GetClientsByEstablishment(int EstablishmentId)
+        {
+            var clients = await _context.Clients
+                                        .Where(c => c.EstablishmentId == EstablishmentId)
+                                        .ToListAsync();
+
+            if (clients == null || clients.Count == 0)
+            {
+                throw new Exception($"No clients found for Establishment ID {EstablishmentId}.");
+            }
+
+            return clients;
+        }
+
     }
 }

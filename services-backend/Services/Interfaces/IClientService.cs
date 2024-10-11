@@ -11,5 +11,7 @@
         Task<Client> BanClient(int Id, int newBan);
 
         Task<Client> ChangeState(int Id, int newState);
+        Task<List<Client>> GetClientsByEstablishment(int EstablishmentId);
+
     }
 }
