@@ -7,8 +7,8 @@ namespace services_backend.Models
         [Key]
         public int IdReservations { get; set; }
         public DateTime Day { get; set; }
-        public TimeSpan InitTime { get; set; }
-        public TimeSpan FinishTime { get; set; }
+        public DateTime InitTime { get; set; }
+        public DateTime FinishTime { get; set; }
         public int Cancel { get; set; }
 
         // Foreign keys

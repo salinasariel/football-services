@@ -73,7 +73,7 @@ namespace services_backend.Services
                                 .FirstOrDefaultAsync(c => c.Phone == phone);
             if (client == null)
             {
-                return null;
+                return client;
             }
             return client;
         }

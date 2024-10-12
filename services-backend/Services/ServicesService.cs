@@ -1,9 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using services_backend.Models;
+using services_backend.Services.Interfaces;
 
 namespace services_backend.Services
 {
-    public class ServicesService
+    public class ServicesService : IServicesService
     {
         private readonly MyDbContext _context;
 

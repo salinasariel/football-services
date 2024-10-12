@@ -1,18 +1,22 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using MySqlX.XDevAPI;
 using services_backend.Models;
 using services_backend.Services.Interfaces;
+using services_backend.Services.Interfaces.services_backend.Services;
+using System.ComponentModel.DataAnnotations;
+using System.Net;
 
 namespace services_backend.Services
 {
     public class ReservationsService : IReservationsService
     {
         private readonly MyDbContext _context;
-        private readonly ClientService _clientsService;
-        private readonly EstablishmentService _establishmentService;
-        private readonly ServicesService _servicesService;
+        private readonly IClientService _clientsService;
+        private readonly IEstablishmentService _establishmentService;
+        private readonly IServicesService _servicesService;
 
-        public ReservationsService(EstablishmentService establishmentService, ClientService clientsService, ServicesService servicesService, MyDbContext context)
+        public ReservationsService(IEstablishmentService establishmentService, IClientService clientsService, IServicesService servicesService, MyDbContext context)
         {
             _establishmentService = establishmentService;
             _clientsService = clientsService;
@@ -33,7 +37,7 @@ namespace services_backend.Services
             return reservations;
         }
 
-       /* public async Task<Reservation> NewReservationFromEstablishment(int EstablishmentId, int Phone, Time initTime, Time finishTime, int ServiceId)
+       public async Task<Reservation> NewReservationFromEstablishment(int EstablishmentId, string Phone, DateTime initTime, DateTime finishTime, int ServiceId, string Name)
         {
             var establishment = await _establishmentService.GetEstablishmentByIdAsync(EstablishmentId);
             if (establishment == null) 
@@ -45,8 +49,42 @@ namespace services_backend.Services
             {
                 throw new Exception($"No found ServiceID {ServiceId}");
             }
+            var exitsClient = await _clientsService.GetClientByPhone(Phone);
+            Client clientToUse;
+            if (exitsClient == null)
+            {
+                var newClient = new Client
+                {
+                    Phone = Phone,
+                    Name = Name,
+                    Email = "user@user.com",
+                    State = 1,
+                    Ban = 0,
+                    EstablishmentId = EstablishmentId
+                };
+                await _clientsService.NewClient(newClient);
+                clientToUse = newClient;
+            } else
+            {
+                clientToUse = exitsClient;
+            }
+            // else if (exitsClient != null) 
+            // {
+            var newReservation = new Reservation
+            {
+                EstablishmentId = EstablishmentId,
+                ClientId = clientToUse.IdClients,  
+                ServiceId = ServiceId,
+                Day = DateTime.Now,         
+                InitTime = initTime,        
+                FinishTime = finishTime,   
+                Cancel = 0                   
+            };
 
-            var client = await
-        } */
+            _context.Reservations.Add(newReservation);
+            await _context.SaveChangesAsync();
+            // }
+            return newReservation;
+        } 
     }
 }
