@@ -8,6 +8,7 @@ namespace services_backend.Services.Interfaces
         Task<TypeService> GetTypeServicesById(int Id);
         Task<TypeService> NewTypeServices(TypeService TypeService);
         Task<TypeService> ChangeTypeServicesState(int Id, int newState);
+        Task<List<TypeService>> GetActiveAllTypeServicesByEstablishment(int EstablishmentID);
 
     }
 }

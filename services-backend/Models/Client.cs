@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 public class Client
 {
-    [Key] // Esta anotación indica que IdClients es la clave primaria
+    [Key] 
     public int IdClients { get; set; }
 
     public string Name { get; set; }
@@ -12,10 +12,10 @@ public class Client
     public int State { get; set; }
     public int Ban { get; set; }
 
-    // Foreign key
+    
     public int EstablishmentId { get; set; }
     public Establishment Establishment { get; set; }
 
-    // Navigation properties
+    
     public ICollection<Reservation> Reservations { get; set; }
 }

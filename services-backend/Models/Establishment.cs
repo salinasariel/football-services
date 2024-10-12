@@ -18,7 +18,7 @@ public class Establishment
     public string CancellationPolicy { get; set; }
     public int State { get; set; }
 
-    // Inicializar las colecciones en el constructor
+    
     public ICollection<Client> Clients { get; set; } = new List<Client>();
     public ICollection<Service> Services { get; set; } = new List<Service>();
     public ICollection<TypeService> TypeServices { get; set; } = new List<TypeService>();

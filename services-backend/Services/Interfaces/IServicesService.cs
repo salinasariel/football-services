@@ -6,7 +6,8 @@ namespace services_backend.Services.Interfaces
     {
         Task<List<Service>> GetAllServices();
         Task<Service> GetTypeServicesById(int Id);
-        Task<Service> NewTypeServices(Service Service);
+        Task<Service> NewServices(Service Service);
         Task<Service> ChangeServicesState(int Id, int newState);
+        
     }
 }

@@ -15,7 +15,21 @@ namespace services_backend.Controllers
             _reservationsService = reservationsService;
         }
 
-        [HttpPost("new")]
+        [HttpGet("GetAllReservationsByEstablishment")]
+        public async  Task<IActionResult> GetAllReservationsByEstablishment(int EstablishmentsId)
+        {
+            try
+            {
+                var reservations = await _reservationsService.GetAllReservationsByEstablishment(EstablishmentsId);
+                return Ok(reservations);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(400, new { message = ex.Message });
+            }
+        }
+
+        [HttpPost("NewReservation")]
         public async Task<IActionResult> NewReservationFromEstablishment(int EstablishmentId, string Phone, DateTime initTime, DateTime finishTime, int ServiceId, string Name)
         {           
 
@@ -34,7 +48,7 @@ namespace services_backend.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { message = ex.Message });
+                return StatusCode(400, new { message = ex.Message });
             }
         }
 

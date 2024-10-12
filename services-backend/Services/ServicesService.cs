@@ -23,7 +23,7 @@ namespace services_backend.Services
             return await _context.Services.FindAsync(Id);
         }
 
-        public async Task<Service> NewTypeServices(Service Service)
+        public async Task<Service> NewServices(Service Service)
         {
             _context.Services.Add(Service);
             await _context.SaveChangesAsync();
