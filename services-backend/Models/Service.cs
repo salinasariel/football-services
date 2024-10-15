@@ -21,7 +21,7 @@ namespace services_backend.Models
 
         // Navigation properties
         public ICollection<Reservation> Reservations { get; set; }
-        public ICollection<Time> Times { get; set; }
+        public ICollection<Times> Times { get; set; }
     }
 
 }

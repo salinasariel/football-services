@@ -11,7 +11,6 @@ namespace services_backend.Models
         public DateTime FinishTime { get; set; }
         public int Cancel { get; set; }
 
-        // Foreign keys
         public int ClientId { get; set; }
         public Client Client { get; set; }
 

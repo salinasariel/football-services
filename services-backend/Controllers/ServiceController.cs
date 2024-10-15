@@ -9,11 +9,13 @@ namespace services_backend.Controllers
     {
         private readonly IServicesService _servicesService;
         private readonly ITypeServicesService _typeServicesService;
+        private readonly ITimeService _timeService;
 
-        public ServiceController(IServicesService servicesService, ITypeServicesService typeServicesService)
+        public ServiceController(IServicesService servicesService, ITypeServicesService typeServicesService, ITimeService timeService)
         {
             _servicesService = servicesService;
             _typeServicesService = typeServicesService;
+            _timeService = timeService;
         }
 
         [HttpPost("NewTypeService")]
@@ -57,6 +59,13 @@ namespace services_backend.Controllers
             {
                 return StatusCode(400, new { message = ex.Message });
             }
+        }
+
+        [HttpPost("NewFranjaTimes")]
+        public async Task<IActionResult> NewFranjaTimes(int ServiceId, int Day, DateTime firstTime, DateTime finishTime)
+        {
+            await _timeService.NewFranjaTimes(ServiceId, Day, firstTime, finishTime);
+            return Ok();
         }
 
     }

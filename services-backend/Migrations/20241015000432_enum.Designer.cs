@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using services_backend;
 
@@ -11,9 +12,11 @@ using services_backend;
 namespace services_backend.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241015000432_enum")]
+    partial class @enum
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -202,11 +205,11 @@ namespace services_backend.Migrations
                     b.Property<int>("Day")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("FinishTime")
-                        .HasColumnType("datetime(6)");
+                    b.Property<TimeSpan>("FinishTime")
+                        .HasColumnType("time(6)");
 
-                    b.Property<DateTime>("InitTime")
-                        .HasColumnType("datetime(6)");
+                    b.Property<TimeSpan>("InitTime")
+                        .HasColumnType("time(6)");
 
                     b.Property<int>("ServiceId")
                         .HasColumnType("int");

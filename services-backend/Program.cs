@@ -25,6 +25,7 @@ builder.Services.AddScoped<IEstablishmentService, EstablishmentService>();
 builder.Services.AddScoped<IReservationsService, ReservationsService>();
 builder.Services.AddScoped<IServicesService, ServicesService>();
 builder.Services.AddScoped<ITypeServicesService, TypeServicesService>();
+builder.Services.AddScoped<ITimeService, TimeService>();
 
 
 

@@ -12,7 +12,7 @@
         public DbSet<Service> Services { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<TypeService> TypeServices { get; set; }
-        public DbSet<Time> Times { get; set; }
+        public DbSet<Times> Times { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -43,7 +43,7 @@
                 .WithMany(s => s.Reservations)
                 .HasForeignKey(r => r.ServiceId);
 
-            modelBuilder.Entity<Time>()
+            modelBuilder.Entity<Times>()
                 .HasOne(t => t.Service)
                 .WithMany(s => s.Times)
                 .HasForeignKey(t => t.ServiceId);
