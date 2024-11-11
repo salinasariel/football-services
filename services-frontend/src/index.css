@@ -5,3 +5,6 @@
 body{
     background-color: #FEFAE0;
 }
+
+.scale-up-center{animation:scale-up-center 0.5s; } @keyframes scale-up-center{ 0%{transform:scale(.5)} 100%{transform:scale(1)} }
+

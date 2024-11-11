@@ -8,7 +8,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="bg-strong-green p-3 shadow-md ">
+    <nav className="bg-strong-green p-5 shadow-md ">
       <div className="container mx-auto flex justify-between items-center">
         <div className="flex items-center space-x-6">
           <button className="text-gray-900">
@@ -20,20 +20,20 @@ export default function Navbar() {
           <h1 className="text-2xl font-semibold text-gray-900">establishment_name</h1>
         </div>
 
-        {/* Menú de usuario */}
+{/*        
         <div className="relative">
           <button
             onClick={toggleMenu}
             className="flex items-center focus:outline-none"
           >
             <span className="sr-only">Abrir menú de usuario</span>
-            {/* Ícono de usuario */}
+            
             <svg className="h-8 w-8 text-gray-900" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
               <path fillRule="evenodd" d="M10 12a6 6 0 100-12 6 6 0 000 12zM2 18a8 8 0 0116 0H2z" clipRule="evenodd"></path>
             </svg>
           </button>
 
-          {/* Dropdown Menu */}
+          
           {menuOpen && (
             <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg">
               <a href="#" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">Perfil</a>
@@ -42,6 +42,8 @@ export default function Navbar() {
             </div>
           )}
         </div>
+         */}
+         
       </div>
     </nav>
   );
