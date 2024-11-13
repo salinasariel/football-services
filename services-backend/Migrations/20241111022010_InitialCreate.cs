@@ -112,6 +112,7 @@ namespace services_backend.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Name = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    State = table.Column<int>(type: "int", nullable: false),
                     EstablishmentId = table.Column<int>(type: "int", nullable: false),
                     TypeServiceId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -140,8 +141,8 @@ namespace services_backend.Migrations
                     IdReservations = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Day = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    InitTime = table.Column<TimeSpan>(type: "time(6)", nullable: false),
-                    FinishTime = table.Column<TimeSpan>(type: "time(6)", nullable: false),
+                    InitTime = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    FinishTime = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     Cancel = table.Column<int>(type: "int", nullable: false),
                     ClientId = table.Column<int>(type: "int", nullable: false),
                     ServiceId = table.Column<int>(type: "int", nullable: false),
@@ -177,10 +178,10 @@ namespace services_backend.Migrations
                 {
                     IdTimes = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Day = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    InitTime = table.Column<TimeSpan>(type: "time(6)", nullable: false),
-                    FinishTime = table.Column<TimeSpan>(type: "time(6)", nullable: false),
+                    Day = table.Column<int>(type: "int", nullable: false),
+                    InitTime = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    FinishTime = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    State = table.Column<int>(type: "int", nullable: false),
                     ServiceId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>

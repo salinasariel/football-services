@@ -4,6 +4,8 @@ using services_backend;
 using services_backend.Services.Interfaces; 
 using services_backend.Services;
 using services_backend.Services.Interfaces.services_backend.Services;
+using AutoMapper;
+using services_backend.Mappings;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,7 +29,7 @@ builder.Services.AddScoped<IServicesService, ServicesService>();
 builder.Services.AddScoped<ITypeServicesService, TypeServicesService>();
 builder.Services.AddScoped<ITimeService, TimeService>();
 
-
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 builder.Services.AddDbContext<MyDbContext>(options =>
     options.UseMySql(builder.Configuration.GetConnectionString("MySqlConnection"),

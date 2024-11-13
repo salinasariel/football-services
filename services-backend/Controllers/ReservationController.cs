@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using services_backend.Models;
 using services_backend.Services.Interfaces;
-
+using AutoMapper;   
+using services_backend.DTOs; 
 namespace services_backend.Controllers
 {
     [Route("api/[controller]")]

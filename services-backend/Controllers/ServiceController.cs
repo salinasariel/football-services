@@ -5,6 +5,8 @@ using services_backend.Services.Interfaces;
 
 namespace services_backend.Controllers
 {
+    [Route("api/services")]
+    [ApiController]
     public class ServiceController : ControllerBase
     {
         private readonly IServicesService _servicesService;

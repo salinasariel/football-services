@@ -2,7 +2,6 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using services_backend;
 
@@ -17,18 +16,14 @@ namespace services_backend.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.10")
+                .HasAnnotation("ProductVersion", "8.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
-
-            MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
             modelBuilder.Entity("Client", b =>
                 {
                     b.Property<int>("IdClients")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("IdClients"));
 
                     b.Property<int>("Ban")
                         .HasColumnType("int");
@@ -63,8 +58,6 @@ namespace services_backend.Migrations
                     b.Property<int>("IdEstablishment")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("IdEstablishment"));
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -120,8 +113,6 @@ namespace services_backend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("IdReservations"));
-
                     b.Property<int>("Cancel")
                         .HasColumnType("int");
 
@@ -160,8 +151,6 @@ namespace services_backend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("IdServices"));
-
                     b.Property<int>("Amount")
                         .HasColumnType("int");
 
@@ -197,8 +186,6 @@ namespace services_backend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("IdTimes"));
-
                     b.Property<int>("Day")
                         .HasColumnType("int");
 
@@ -226,8 +213,6 @@ namespace services_backend.Migrations
                     b.Property<int>("IdTypeServices")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("IdTypeServices"));
 
                     b.Property<int>("Active")
                         .HasColumnType("int");

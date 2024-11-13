@@ -2,6 +2,9 @@
 using services_backend.Models;
 using services_backend.Services;
 using services_backend.Services.Interfaces.services_backend.Services;
+using services_backend.DTOs;
+using AutoMapper;
+
 
 namespace services_backend.Controllers
 {
@@ -10,20 +13,22 @@ namespace services_backend.Controllers
     public class EstablishmentController : ControllerBase
     {
         private readonly IEstablishmentService _establishmentService;
+        private readonly IMapper _mapper;
 
-        public EstablishmentController(IEstablishmentService establishmentService)
+        public EstablishmentController(IEstablishmentService establishmentService, IMapper mapper)
         {
             _establishmentService = establishmentService;
+            _mapper = mapper;
         }
 
-        [HttpGet]
+        [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll()
         {
             var establishments = await _establishmentService.GetAllEstablishmentsAsync();
             return Ok(establishments);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("GetEstablishmetbyId")]
         public async Task<IActionResult> GetById(int id)
         {
             var establishment = await _establishmentService.GetEstablishmentByIdAsync(id);
@@ -33,7 +38,7 @@ namespace services_backend.Controllers
             return Ok(establishment);
         }
 
-        [HttpPost]
+        /*[HttpPost("CreateEstablishment")]
         public async Task<IActionResult> Create([FromBody] Establishment establishment)
         {
             if (!ModelState.IsValid)
@@ -41,9 +46,31 @@ namespace services_backend.Controllers
 
             var createdEstablishment = await _establishmentService.CreateEstablishmentAsync(establishment);
             return CreatedAtAction(nameof(GetById), new { id = createdEstablishment.IdEstablishment }, createdEstablishment);
-        }
+        }*/
+        [HttpPost("CreateEstablishment")]
+public async Task<IActionResult> Create([FromBody] EstablishmentDto establishmentDto)
+{
+    try
+    {
+        // Mapeo de DTO a modelo
+        var establishment = _mapper.Map<Establishment>(establishmentDto);
 
-        [HttpPut("{id}")]
+        // Llamada al servicio para crear el establecimiento
+        var createdEstablishment = await _establishmentService.CreateEstablishmentAsync(establishment);
+
+        // Retorno exitoso con el objeto creado
+        return CreatedAtAction(nameof(GetById), new { id = createdEstablishment.IdEstablishment }, createdEstablishment);
+    }
+    catch (Exception ex)
+    {
+        // Manejo de errores si ocurre algo
+        return BadRequest(new { message = ex.Message });
+    }
+}
+
+
+
+        [HttpPut("UpdateEstablishmet")]
         public async Task<IActionResult> Update(int id, [FromBody] Establishment establishment)
         {
             if (!ModelState.IsValid)
@@ -56,7 +83,7 @@ namespace services_backend.Controllers
             return Ok(updatedEstablishment);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("DeleteEstablishmet")]
         public async Task<IActionResult> Delete(int id)
         {
             var success = await _establishmentService.DeleteEstablishmentAsync(id);
