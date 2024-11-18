@@ -44,6 +44,7 @@ namespace services_backend.Services
         {
             try
             {
+                
                 _context.TypeServices.Add(typeService);
                 await _context.SaveChangesAsync();
                 return typeService;

@@ -1,20 +1,22 @@
-import React from 'react'
+import React from 'react';
 
-export const ServiceCard = () => {
+export const ServiceCard = ({ serviceName , serviceDesc , photo }) => {
   return (
-    <div className='bg-light-brown p-4 w-30 border rounded-lg shadow-md scale-up-center transition transform hover:scale-105 duration-300 ease-in-out'>
-        <h1 className=''>card.tittle</h1>
-        <h1 className=''>card.subtittle</h1>
-        <img 
-        className='border rounded-lg'
-          src='https://media.istockphoto.com/id/1400697245/es/vector/vector-de-campo-de-f%C3%BAtbol-de-c%C3%A9sped-rayado-con-estrategias-de-juego.jpg?s=612x612&w=is&k=20&c=i-15oopMQgFRda_wTp5xhFZe1fpZ62ZmvvmekvUZU44=' 
-          alt='Campo de fútbol' 
-        />
-        <div className='text-right'>
-        <button className='bg-light-green border p-2 m-3 rounded-lg'>Reservar</button>
-        </div>
+    <div className="bg-light-brown p-4 w-30 border rounded-lg shadow-md scale-up-center transition transform hover:scale-105 duration-300 ease-in-out">
+      <h1 className="text-xl font-bold">{serviceName}</h1>
+      <p className="text-sm text-gray-700">{serviceDesc}</p>
+      <img
+        className="border rounded-lg mt-3 w-full h-48 object-cover"
+        src={photo || 'https://via.placeholder.com/650'} // Imagen predeterminada si no hay foto
+        alt={serviceName}
+      />
+      <div className="text-right mt-4">
+        <button className="bg-light-green border p-2 rounded-lg hover:bg-strong-green">
+          Reservar
+        </button>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default ServiceCard; 
+export default ServiceCard;

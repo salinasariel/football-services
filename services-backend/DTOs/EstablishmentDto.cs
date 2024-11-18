@@ -16,6 +16,9 @@ namespace services_backend.DTOs
         public string Logo { get; set; }
         public string Description { get; set; }
         public string CancellationPolicy { get; set; }
+        public string ColorLight { get; set; }
+        public string ColorMedium { get; set; }
+        public string ColorStrong { get; set; }
         public int State { get; set; }
     }
 }

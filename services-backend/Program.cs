@@ -29,6 +29,18 @@ builder.Services.AddScoped<IServicesService, ServicesService>();
 builder.Services.AddScoped<ITypeServicesService, TypeServicesService>();
 builder.Services.AddScoped<ITimeService, TimeService>();
 
+
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
+
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 builder.Services.AddDbContext<MyDbContext>(options =>
@@ -48,6 +60,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+app.UseCors("AllowAllOrigins");
 
 app.MapControllers();
 

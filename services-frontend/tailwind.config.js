@@ -1,5 +1,11 @@
+import React, { useState, useEffect } from 'react';
+
+import { fetchEnvironmentData, getEnvironmentData } from '../EnvironmentData';
+
+
 /** @type {import('tailwindcss').Config} */
 export default {
+
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",

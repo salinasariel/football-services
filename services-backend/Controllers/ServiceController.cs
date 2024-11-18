@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using services_backend.DTOs;
 using services_backend.Models;
 using services_backend.Services;
 using services_backend.Services.Interfaces;
+using AutoMapper;
 
 namespace services_backend.Controllers
 {
@@ -12,20 +14,23 @@ namespace services_backend.Controllers
         private readonly IServicesService _servicesService;
         private readonly ITypeServicesService _typeServicesService;
         private readonly ITimeService _timeService;
+        private readonly IMapper _mapper;
 
-        public ServiceController(IServicesService servicesService, ITypeServicesService typeServicesService, ITimeService timeService)
+        public ServiceController(IServicesService servicesService, ITypeServicesService typeServicesService, ITimeService timeService, IMapper mapper)
         {
             _servicesService = servicesService;
             _typeServicesService = typeServicesService;
             _timeService = timeService;
+            _mapper = mapper;
         }
 
         [HttpPost("NewTypeService")]
-        public async Task<IActionResult> NewTypeServices([FromBody] TypeService typeService)
+        public async Task<IActionResult> NewTypeServices([FromBody] TypeServiceDto typeServiceDto)
         {
 
             try
             {
+                var typeService = _mapper.Map<TypeService>(typeServiceDto);
                 var newTypeService = await _typeServicesService.NewTypeServices(typeService);
 
                 return Ok(newTypeService);
@@ -50,11 +55,12 @@ namespace services_backend.Controllers
             }
         }
         [HttpPost("NewService")]
-        public async Task<IActionResult> NewServices([FromBody]Service Service)
+        public async Task<IActionResult> NewServices([FromBody]ServiceDto serviceDto)
         {
             try
             {
-                var service = await _servicesService.NewServices(Service);
+                var service = _mapper.Map<Service>(serviceDto);
+                var newService = await _servicesService.NewServices(service);
                 return Ok(service);
             }
             catch (Exception ex)

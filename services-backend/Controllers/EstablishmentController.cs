@@ -47,50 +47,55 @@ namespace services_backend.Controllers
             var createdEstablishment = await _establishmentService.CreateEstablishmentAsync(establishment);
             return CreatedAtAction(nameof(GetById), new { id = createdEstablishment.IdEstablishment }, createdEstablishment);
         }*/
+
         [HttpPost("CreateEstablishment")]
-public async Task<IActionResult> Create([FromBody] EstablishmentDto establishmentDto)
-{
-    try
-    {
-        // Mapeo de DTO a modelo
-        var establishment = _mapper.Map<Establishment>(establishmentDto);
+        public async Task<IActionResult> Create([FromBody] EstablishmentDto establishmentDto)
+        {
+            try
+            {
+                var establishment = _mapper.Map<Establishment>(establishmentDto);
 
-        // Llamada al servicio para crear el establecimiento
-        var createdEstablishment = await _establishmentService.CreateEstablishmentAsync(establishment);
+                var createdEstablishment = await _establishmentService.CreateEstablishmentAsync(establishment);
 
-        // Retorno exitoso con el objeto creado
-        return CreatedAtAction(nameof(GetById), new { id = createdEstablishment.IdEstablishment }, createdEstablishment);
-    }
-    catch (Exception ex)
-    {
-        // Manejo de errores si ocurre algo
-        return BadRequest(new { message = ex.Message });
-    }
-}
+                return Ok(createdEstablishment);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
 
 
 
         [HttpPut("UpdateEstablishmet")]
-        public async Task<IActionResult> Update(int id, [FromBody] Establishment establishment)
+        public async Task<IActionResult> Update(int id, [FromBody] EstablishmentDto establishmentDto)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            if (id != establishment.IdEstablishment)
-                return BadRequest("El ID del establecimiento no coincide.");
-
+            try
+            {
+            var establishment = _mapper.Map<Establishment>(establishmentDto);
             var updatedEstablishment = await _establishmentService.UpdateEstablishmentAsync(establishment);
             return Ok(updatedEstablishment);
+            }
+            catch
+            {
+                return NotFound();
+            }
+            
         }
 
         [HttpDelete("DeleteEstablishmet")]
         public async Task<IActionResult> Delete(int id)
         {
-            var success = await _establishmentService.DeleteEstablishmentAsync(id);
-            if (!success)
+            try
+            {
+                var success = await _establishmentService.DeleteEstablishmentAsync(id);
+                return Ok();
+            }
+            catch
+            {
                 return NotFound();
-
-            return NoContent();
+            }
+           
         }
     }
 }
