@@ -1,13 +1,16 @@
 import React from 'react';
 
 export const ServiceCard = ({ serviceName , serviceDesc , photo }) => {
+
+  const decodePhoto= `data:image/jpg;base64,${photo}`;
+  
   return (
     <div className="bg-light-brown p-4 w-30 border rounded-lg shadow-md scale-up-center transition transform hover:scale-105 duration-300 ease-in-out">
       <h1 className="text-xl font-bold">{serviceName}</h1>
       <p className="text-sm text-gray-700">{serviceDesc}</p>
       <img
         className="border rounded-lg mt-3 w-full h-48 object-cover"
-        src={photo || 'https://via.placeholder.com/650'} // Imagen predeterminada si no hay foto
+        src={decodePhoto || 'https://via.placeholder.com/650'} 
         alt={serviceName}
       />
       <div className="text-right mt-4">

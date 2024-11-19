@@ -3,7 +3,7 @@ import api from './api';
 let environmentData = null;
 let typeServicesData = null; 
 
-let establishmentId = 4;
+let establishmentId = 9;
 
 export async function fetchEnvironmentData() {
 
@@ -25,7 +25,7 @@ export async function fetchEnvironmentData() {
 
   try {
 
-    const responseType = await api.get(`Services/GetActiveAllTypeServicesByEstablishment?EstablishmentID=4`);
+    const responseType = await api.get(`Services/GetActiveAllTypeServicesByEstablishment?EstablishmentID=${establishmentId}`);
     const data = responseType?.data;
 
     typeServicesData = data;
