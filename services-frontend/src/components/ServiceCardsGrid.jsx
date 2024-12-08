@@ -28,6 +28,7 @@ export const ServiceCardsGrid = () => {
       serviceName={service.name}
       serviceDesc={service.description || 'Descripción no disponible'}
       photo={service.photo || ''}
+      serviceId={service.idTypeServices || ''}
     />
   ))}
 </div>
