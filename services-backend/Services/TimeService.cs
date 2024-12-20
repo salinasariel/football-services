@@ -34,7 +34,63 @@ namespace services_backend.Services
                 throw new Exception($"Service NewTypeServices failed: {ex.Message}", ex);
             }
         }
+        
+public async Task<Dictionary<string, int>> GetActiveAllTimesByTypeService(int TypeServiceId)
+{
+    try
+    {
+        // Obtenemos todos los servicios activos relacionados con el TypeServiceId
+        var services = await _context.Services
+            .Where(s => s.TypeServiceId == TypeServiceId && s.State == 1)
+            .Select(s => s.IdServices)
+            .ToListAsync();
 
+        if (!services.Any())
+        {
+            throw new Exception($"No se encontraron servicios para el TypeService ID {TypeServiceId}");
+        }
+
+        // Obtenemos los horarios activos relacionados con esos servicios
+        var times = await _context.Times
+            .Where(t => services.Contains(t.ServiceId) && t.State == 1)
+            .ToListAsync();
+
+        if (!times.Any())
+        {
+            throw new Exception($"No se encontraron Times activos para el TypeService ID {TypeServiceId}");
+        }
+
+        // Agrupamos por combinación de día, hora de inicio y hora de fin
+        var availabilityByTime = times
+            .GroupBy(t => new { t.Day, t.InitTime, t.FinishTime })
+            .ToDictionary(
+                group => $"{GetDayName(group.Key.Day)}: {group.Key.InitTime:HH:mm} - {group.Key.FinishTime:HH:mm}",
+                group => group.Count()
+            );
+
+        return availabilityByTime;
+    }
+    catch (Exception ex)
+    {
+        throw new Exception($"Error al obtener Times activos por TypeService ID {TypeServiceId}: {ex.Message}", ex);
+    }
+}
+
+// Método auxiliar para obtener el nombre del día
+private string GetDayName(int day)
+{
+    return day switch
+    {
+        1 => "Lunes",
+        2 => "Martes",
+        3 => "Miércoles",
+        4 => "Jueves",
+        5 => "Viernes",
+        6 => "Sábado",
+        7 => "Domingo",
+        _ => "Desconocido"
+    };
+}
         public async Task<Times> NewTimes(Times times)
         {
             try

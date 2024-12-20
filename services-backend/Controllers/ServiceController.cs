@@ -76,6 +76,26 @@ namespace services_backend.Controllers
             return Ok();
         }
 
+        [HttpGet("GetActiveAllTimesByTypeService/{TypeServiceId}")]
+        public async Task<IActionResult> GetActiveAllTimesByTypeService(int TypeServiceId)
+        {
+            try
+            {
+                var availability = await _timeService.GetActiveAllTimesByTypeService(TypeServiceId);
+
+                if (availability == null || availability.Count == 0)
+                {
+                    return NotFound($"No se encontró disponibilidad para el TypeService ID {TypeServiceId}.");
+                }
+
+                return Ok(availability);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Ocurrió un error al procesar la solicitud: {ex.Message}");
+            }
+        }
+
     }
 
 }
